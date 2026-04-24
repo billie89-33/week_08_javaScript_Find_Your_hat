@@ -23,6 +23,8 @@ print(){
     for(let row of this.field){
         console.log(row.join("  "))
     }
+
+    
 }
 
 move(direction) {
@@ -32,18 +34,43 @@ move(direction) {
     else if (direction === 'r') this.currX += 1;
   }
 
+  static generateField(height, width, percentage = 0.1) {
+    const field = [];
+    for (let y = 0; y < height; y++) {
+      field.push([]);
+      for (let x = 0; x < width; x++) {
+        const prob = Math.random();
+        field[y][x] = prob > percentage ? fieldCharacter : hole;
+      }
+    }
+
+   
+    let hatX = Math.floor(Math.random() * width);
+    let hatY = Math.floor(Math.random() * height);
+    while (hatX === 0 && hatY === 0) {
+      hatX = Math.floor(Math.random() * width);
+      hatY = Math.floor(Math.random() * height);
+    }
+    field[hatY][hatX] = hat;
+
+    return field;
+  }
+
 };
 
+const randomMapData = Field.generateField(10, 10, 0.2); 
+const myField = new Field(randomMapData);
+
+// // สร้างแมพจำลองขึ้นมาทดสอบก่อน
+// const myField = new Field([
+//   [pathCharacter, fieldCharacter, hole],
+//   [fieldCharacter, fieldCharacter, fieldCharacter],
+//   [fieldCharacter, hat, fieldCharacter],
+// ]);
 
 
-// สร้างแมพจำลองขึ้นมาทดสอบก่อน
-const myField = new Field([
-  [pathCharacter, fieldCharacter, hole],
-  [fieldCharacter, fieldCharacter, fieldCharacter],
-  [fieldCharacter, hat, fieldCharacter],
-]);
 
-// สั่งให้แสดงผล
+
 myField.print();
 
 let playing = true;
@@ -69,10 +96,10 @@ while (playing){
   const currentTile = myField.field[myField.currY][myField.currX];
 
   if (currentTile === hat) {
-    console.log('Congrats! You found your hat! 🎓');
+    console.log('เย้!! กินไก่');
     playing = false;
   } else if (currentTile === hole) {
-    console.log('Oops! You fell into a hole! 😻');
+    console.log('โดนหลุดดูด');
     playing = false;
   } else {
     myField.field[myField.currY][myField.currX] = pathCharacter;
