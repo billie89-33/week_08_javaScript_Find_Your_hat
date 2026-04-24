@@ -53,6 +53,13 @@ while (playing){
     const input = prompt('Which way?( u, d, l, r):').toLowerCase();
     myField.move(input);
 
+
+    if (myField.currY < 0 || myField.currY >= myField.field.length || 
+      myField.currX < 0 || myField.currX >= myField.field[0].length) {
+            console.log('คุณตกแมพตายละ');
+            playing = false;
+            break;
+        }
   
 
   
