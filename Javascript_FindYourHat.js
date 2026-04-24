@@ -51,6 +51,9 @@ let playing = true;
 while (playing){
     myField.print();
     const input = prompt('Which way?( u, d, l, r):').toLowerCase();
+
+    myField.field[myField.currY][myField.currX] = fieldCharacter
+
     myField.move(input);
 
 
