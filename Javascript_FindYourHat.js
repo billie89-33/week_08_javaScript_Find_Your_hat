@@ -1,8 +1,8 @@
 const prompt = require('prompt-sync')({sigint: true});
 
 
-const hat = "🎓"
-const hole = "😻"
+const hat = "^"
+const hole = "0"
 const fieldCharacter = "📕"
 const pathCharacter = "*"
 
@@ -24,6 +24,13 @@ print(){
         console.log(row.join("  "))
     }
 }
+
+move(direction) {
+    if (direction === 'u') this.currY -= 1;
+    else if (direction === 'd') this.currY += 1;
+    else if (direction === 'l') this.currX -= 1;
+    else if (direction === 'r') this.currX += 1;
+  }
 
 };
 
