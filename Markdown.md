@@ -37,4 +37,4 @@
 const myField = new Field(randomMapData);
 
 update ส่วนสุ่มเกิดตัวละคร ในส่วน class field =>
- this.field[0][0] = pathCharacter;
+ this.field[0][0] = pathCharacter; และเพิ่ม feature random เกิดตัวละคร
