@@ -1,4 +1,4 @@
-const prompt = require('prompt-sync')({sigint: true});
+const prompt = require('prompt-sync')({ sigint: true });
 
 
 const hat = "^"
@@ -8,26 +8,33 @@ const pathCharacter = "*"
 
 
 class Field {
-constructor(field) {
+  constructor(field) {
     this.field = field;
     this.currX = 0;
     this.currY = 0;
 
-  this.field[0][0] = pathCharacter;
-};
- 
-print(){
+    for (let y = 0; y < field.length; y++) {
+      for (let x = 0; x < field[y].length; x++) {
+        if (field[y][x] === pathCharacter) {
+          this.currX = x;
+          this.currY = y;
+        }
+      }
+    }
+  };
 
-     process.stdout.write('\x1Bc'); 
+  print() {
 
-    for(let row of this.field){
-        console.log(row.join("  "))
+    process.stdout.write('\x1Bc');
+
+    for (let row of this.field) {
+      console.log(row.join("  "))
     }
 
-    
-}
 
-move(direction) {
+  }
+
+  move(direction) {
     if (direction === 'u') this.currY -= 1;
     else if (direction === 'd') this.currY += 1;
     else if (direction === 'l') this.currX -= 1;
@@ -44,7 +51,13 @@ move(direction) {
       }
     }
 
-   
+    const startX = Math.floor(Math.random() * width);
+    const startY = Math.floor(Math.random() * height);
+    field[startY][startX] = pathCharacter;
+
+
+
+
     let hatX = Math.floor(Math.random() * width);
     let hatY = Math.floor(Math.random() * height);
     while (hatX === 0 && hatY === 0) {
@@ -58,7 +71,7 @@ move(direction) {
 
 };
 
-const randomMapData = Field.generateField(10, 10, 0.2); 
+const randomMapData = Field.generateField(10, 10, 0.2);
 const myField = new Field(randomMapData);
 
 // // สร้างแมพจำลองขึ้นมาทดสอบก่อน
@@ -75,24 +88,24 @@ myField.print();
 
 let playing = true;
 
-while (playing){
-    myField.print();
-    const input = prompt('Which way?( u, d, l, r):').toLowerCase();
+while (playing) {
+  myField.print();
+  const input = prompt('Which way?( u, d, l, r):').toLowerCase();
 
-    myField.field[myField.currY][myField.currX] = fieldCharacter
+  myField.field[myField.currY][myField.currX] = fieldCharacter
 
-    myField.move(input);
+  myField.move(input);
 
 
-    if (myField.currY < 0 || myField.currY >= myField.field.length || 
-      myField.currX < 0 || myField.currX >= myField.field[0].length) {
-            console.log('คุณตกแมพตายละ');
-            playing = false;
-            break;
-        }
-  
+  if (myField.currY < 0 || myField.currY >= myField.field.length ||
+    myField.currX < 0 || myField.currX >= myField.field[0].length) {
+    console.log('คุณตกแมพตายละ');
+    playing = false;
+    break;
+  }
 
-  
+
+
   const currentTile = myField.field[myField.currY][myField.currX];
 
   if (currentTile === hat) {

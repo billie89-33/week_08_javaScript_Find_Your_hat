@@ -35,3 +35,6 @@
 -เขียนเงื่อนไข ในfield 
 -ประกาศการใช้ ด้านนอก const randomMapData = Field.generateField(10, 10, 0.2); 
 const myField = new Field(randomMapData);
+
+update ส่วนสุ่มเกิดตัวละคร ในส่วน class field =>
+ this.field[0][0] = pathCharacter;
