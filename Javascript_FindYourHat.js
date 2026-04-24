@@ -27,7 +27,7 @@ print(){
 
 };
 
-let playing = true;
+
 
 // สร้างแมพจำลองขึ้นมาทดสอบก่อน
 const myField = new Field([
@@ -38,6 +38,31 @@ const myField = new Field([
 
 // สั่งให้แสดงผล
 myField.print();
+
+let playing = true;
+
+while (playing){
+    myField.print();
+    const input = prompt('Which way?( u, d, l, r):').toLowerCase();
+    myField.move(input);
+
+  
+
+  
+  const currentTile = myField.field[myField.currY][myField.currX];
+
+  if (currentTile === hat) {
+    console.log('Congrats! You found your hat! 🎓');
+    playing = false;
+  } else if (currentTile === hole) {
+    console.log('Oops! You fell into a hole! 😻');
+    playing = false;
+  } else {
+    myField.field[myField.currY][myField.currX] = pathCharacter;
+  }
+
+
+}
 
 
 
